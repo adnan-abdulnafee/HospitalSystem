@@ -8,24 +8,24 @@ import javax.swing.JOptionPane;
 /**
  * @author Codersbay
  */
-public  class Dao {
-    public    Connection getConnetion() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
+public class Dao {
+    public Connection getConnetion() throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hospital_system", "root", "sadb");
         if (con != null) {
-            JOptionPane.showMessageDialog(null, "connect");
+//            JOptionPane.showMessageDialog(null, "connect");
             return con;
         }
 
         return null;
     }
 
-public void closeConnection(Connection con) throws Exception {
+    public void closeConnection(Connection con) throws Exception {
         if (con != null) {
             con.close();
         }
 
-}
+    }
 
 
 //
