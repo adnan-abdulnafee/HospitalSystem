@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
  */
 public  class Dao {
     public    Connection getConnetion() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hospital_system", "root", "sadb");
         if (con != null) {
-            JOptionPane.showMessageDialog(null, "connect");
+//            JOptionPane.showMessageDialog(null, "connect");
             return con;
         }
 

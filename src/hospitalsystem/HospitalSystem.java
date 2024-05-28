@@ -4,6 +4,10 @@
  */
 package hospitalsystem;
 
+import com.coders.hospital.view.Login;
+//import com.mysql.jdbc.Driver;
+//import com.mysql.cj.jdbc.Driver;
+
 /**
  *
  * @author Codersbay
@@ -15,6 +19,13 @@ public class HospitalSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+     Login login=new Login();
+     login.setVisible(true);
+     
+        
+        
+        
     }
     
 }
