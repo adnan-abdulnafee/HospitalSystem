@@ -3,7 +3,7 @@ package com.coders.hospital.db.vo;
 /**
  * @author Codersbay
  */
-public class UserDetailsVo {
+public class UsersDetailsVo {
     private int id;
     private UsersVo usersVo;
     private String firstName;
