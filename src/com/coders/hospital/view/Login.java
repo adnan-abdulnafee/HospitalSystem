@@ -116,31 +116,28 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String userName=txtUserName.getText();
-        String password=txtPassword.getText();
-        UsersVo userVo=new UsersVo();
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+        UsersVo userVo = new UsersVo();
         userVo.setUsername(userName);
         userVo.setPassword(password);
         try {
-          UsersVo   uv=UsersDao.getInstance().getData(userVo);
-          if(uv==null){
-              JOptionPane.showMessageDialog(null, "Enter valid username and password");
-           }else{
-              Home home=new Home();
-              home.setVisible(true);
-              this.setVisible(false);
-              
-          }
+            UsersVo uv = UsersDao.getInstance().getData(userVo);
+            if (uv == null) {
+                JOptionPane.showMessageDialog(null, "Enter valid username and password");
+            } else {
+               
+                Home home = new Home();
+                home.setVisible(true);
+                this.setVisible(false);
+
+            }
         } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null,ex);
-            
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
 
-
-        
-        
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
