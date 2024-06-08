@@ -4,15 +4,12 @@
  */
 package com.coders.hospital.view;
 
-import static com.coders.hospital.db.type.UsersType.ADMIN;
-import static com.coders.hospital.db.type.UsersType.DOCTOR;
-import static com.coders.hospital.db.type.UsersType.NURSE;
-
 /**
  *
  * @author Codersbay
  */
-public class UsersView extends javax.swing.JFrame 
+public class UsersView extends javax.swing.JFrame {
+
     /**
      * Creates new form UsersView
      */
@@ -29,32 +26,42 @@ public class UsersView extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtFatherName = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txtMobile = new javax.swing.JTextField();
         txtUserName = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtFirstName = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtFatherName = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtMobile = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setModalExclusionType(ADMIN,DOCTOR,NURSE);
+
+        jLabel6.setText("Father Name");
 
         jLabel1.setText("ID");
+
+        jLabel7.setText("Mobile");
 
         jLabel2.setText("User Name");
 
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserNameActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -70,17 +77,6 @@ public class UsersView extends javax.swing.JFrame
         });
 
         jLabel5.setText("First name");
-
-        jLabel6.setText("Father Name");
-
-        jLabel7.setText("Mobile");
-
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,9 +115,6 @@ public class UsersView extends javax.swing.JFrame
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -165,10 +158,6 @@ public class UsersView extends javax.swing.JFrame
                 .addGap(131, 131, 131))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
-
-        jButton1.getAccessibleContext().setAccessibleDescription("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,14 +165,20 @@ public class UsersView extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+int id =Integer.valueOf(txtId.getText());
+        
+        
+        
+        
+        
+        
+     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,8 +208,10 @@ public class UsersView extends javax.swing.JFrame
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new UsersView().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UsersView().setVisible(true);
+            }
         });
     }
 
