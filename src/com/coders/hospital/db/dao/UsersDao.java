@@ -2,8 +2,6 @@ package com.coders.hospital.db.dao;
 
 import com.coders.hospital.db.type.UsersType;
 import com.coders.hospital.db.vo.UsersVo;
-import com.mysql.cj.xdevapi.PreparableStatement;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,6 +65,7 @@ public class UsersDao extends Dao implements DaoList<UsersVo> {
         Connection con = null;
         UsersVo usersVo = null;
         ResultSet rs = null;
+       
         try {
             con = getConnetion();
             String sql = "SELECT * FROM users WHERE USER_NAME='" + uv.getUsername() + "' AND PASSWORD='" + uv.getPassword() + "' ";

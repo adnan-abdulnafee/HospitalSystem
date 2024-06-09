@@ -5,13 +5,13 @@ package com.coders.hospital.db.type;
  */
 public enum UsersType {
 
-    ADMIN(1, "admin"), DOCTOR(2, "doctor");
+    ADMIN(1, "admin"), DOCTOR(2, "doctor"), NURSE(3, "nurse");
 //ممكن كمل بقية الثوابت عندي ك المريض و النرس و الخ
 
     private int id;
     private String type;
 
-    private UsersType(int id, String type) {
+    UsersType(int id, String type) {
         this.id = id;
         this.type = type;
     }
