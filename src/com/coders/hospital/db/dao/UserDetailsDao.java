@@ -1,7 +1,7 @@
 package com.coders.hospital.db.dao;
 
 import com.coders.hospital.db.vo.UserDetailsVo;
-import com.sun.jdi.connect.spi.Connection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
@@ -32,11 +32,14 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
 
     @Override
     public int insert(UserDetailsVo udv) throws Exception {
-        java.sql.Connection con = null;///////
+        
+        Connection con = null;
+        
+       //java.sql.Connection con = null;///////
         int count = 0;
         try {
             con = getConnetion();
-            String sql = "INSERT INTO users_details (USERS_ID,FIRST_NAME,FATHER_NAME;MOBILE)VALUES( ?,  ?,  ?,  ?) ";
+            String sql = "INSERT INTO users_details(USER_ID,FIRST_NAME,FATHER_NAME,MOBILE) VALUES ( ?,  ?,  ?,  ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, udv.getUsersVo().getId());
             ps.setString(2, udv.getFirstName());
@@ -45,6 +48,7 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
             count = ps.executeUpdate();
             ps.close();
         } catch (Exception ex) {
+            System.out.println(ex);
         } finally {
             closeConnection(con);
         }
