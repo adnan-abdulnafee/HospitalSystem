@@ -31,33 +31,33 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
     }
 
     @Override
-    public boolean insert(UserDetailsVo udv) throws Exception {
+    public int insert(UserDetailsVo udv) throws Exception {
         java.sql.Connection con = null;///////
-        boolean isInsert = false;
+        int count = 0;
         try {
             con = getConnetion();
             String sql = "INSERT INTO users_details (USERS_ID,FIRST_NAME,FATHER_NAME;MOBILE)VALUES( ?,  ?,  ?,  ?) ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, udv.getUsersVo().getId());
             ps.setString(2, udv.getFirstName());
-            ps.setString(3, udv.getFathername());
+            ps.setString(3, udv.getFatherName());
             ps.setString(4, udv.getMobile());
-            isInsert = ps.execute();
+            count = ps.executeUpdate();
             ps.close();
         } catch (Exception ex) {
         } finally {
             closeConnection(con);
         }
-        return isInsert;
+        return count;
     }
 
     @Override
-    public boolean update(UserDetailsVo t) throws Exception {
+    public int update(UserDetailsVo t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean delete(UserDetailsVo t) throws Exception {
+    public int delete(UserDetailsVo t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

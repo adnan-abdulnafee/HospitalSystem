@@ -30,33 +30,35 @@ public class UsersDao extends Dao implements DaoList<UsersVo> {
     }
 
     @Override
-    public boolean insert(UsersVo uv) throws Exception {
+    public int insert(UsersVo uv) throws Exception {
        Connection con = null;
-        boolean isInsert=false;
+        int count=0;
         try {
             con = getConnetion();
-            String sql = "INSERT INTO users(USER_NAME,PASSWORD,USER_TYPE VALUES(?,?,?) ";
+            String sql = "INSERT INTO users(USER_NAME,PASSWORD,USER_TYPE,ID) VALUES(?,?,?,?) ";
             PreparedStatement ps = con.prepareStatement(sql);
+            
             ps.setString(1, uv.getUsername());
             ps.setString(2, uv.getPassword());
             ps.setInt(3, uv.getUsersType().getId());
-            isInsert= ps.execute();
+            ps.setInt(4, uv.getId());
+            count= ps.executeUpdate();
             ps.close();
         }catch (Exception ex) {
         } finally {
             closeConnection(con);
         }
 
-        return isInsert;
+        return count;
     }
 
     @Override
-    public boolean update(UsersVo uv) throws Exception {
+    public int update(UsersVo uv) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean delete(UsersVo uv) throws Exception {
+    public int delete(UsersVo uv) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -76,7 +78,9 @@ public class UsersDao extends Dao implements DaoList<UsersVo> {
                 usersVo.setId(rs.getInt("id"));
                 usersVo.setUsername(rs.getString("user_name"));
                 usersVo.setPassword(rs.getString("password"));
-                UsersType usersType = UsersType.getUsersTypeById(rs.getInt("USER_TYPE"));
+                
+                //UsersType usersType = UsersType.getUsersTypeById(rs.getInt("USER_TYPE"));
+                UsersType usersType =UsersType.getUsersTypeByType("USER_TYPE");
                 usersVo.setUsersType(usersType);
 
             }

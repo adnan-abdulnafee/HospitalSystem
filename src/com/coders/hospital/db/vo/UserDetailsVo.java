@@ -6,9 +6,9 @@ package com.coders.hospital.db.vo;
 public class UserDetailsVo {
     private int id;
     private UsersVo usersVo;
-    private String firstName;
-    private String Fathername;
-    private String mobile;
+    private String FirstName;
+    private String FatherName;
+    private String Mobile;
 
     public int getId() {
         return id;
@@ -27,26 +27,26 @@ public class UserDetailsVo {
     }
 
     public String getFirstName() {
-        return firstName;
+        return FirstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.FirstName = firstName;
     }
 
-    public String getFathername() {
-        return Fathername;
+    public String getFatherName() {
+        return FatherName;
     }
 
-    public void setFathername(String fathername) {
-        Fathername = fathername;
+    public void setFatherName(String fathername) {
+        FatherName = fathername;
     }
 
     public String getMobile() {
-        return mobile;
+        return Mobile;
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile;
+        this.Mobile = mobile;
     }
 }
