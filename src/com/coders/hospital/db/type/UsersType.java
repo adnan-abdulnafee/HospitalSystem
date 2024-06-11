@@ -17,9 +17,9 @@ public enum UsersType {
     }
 
 
-    public static UsersType getUsersTypeById(int id) {
+    public static UsersType getUsersTypeByType(String type) {
         for ( UsersType usersType : UsersType.values() ) {
-            if (usersType.getId() == id) {
+            if (usersType.getType()== type ) {
                 return usersType;
             }
         }

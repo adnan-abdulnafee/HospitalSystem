@@ -4,8 +4,18 @@
  */
 package com.coders.hospital.view;
 
+import com.coders.hospital.db.dao.UserDetailsDao;
+import com.coders.hospital.db.dao.UsersDao;
+import com.coders.hospital.db.type.UsersType;
+import com.coders.hospital.db.vo.UserDetailsVo;
+import com.coders.hospital.db.vo.UsersVo;
+import com.coders.hospital.validation.Validation;
+import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
+import java.lang.System.Logger;
+
+import javax.swing.*;
+
 /**
- *
  * @author Codersbay
  */
 public class UsersView extends javax.swing.JFrame {
@@ -15,6 +25,7 @@ public class UsersView extends javax.swing.JFrame {
      */
     public UsersView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -38,7 +49,7 @@ public class UsersView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cUserType = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtFirstName = new javax.swing.JTextField();
 
@@ -69,10 +80,11 @@ public class UsersView extends javax.swing.JFrame {
 
         jLabel4.setText("UserType");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "DOCTOR", "NURSE" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "doctor", "nurse" }));
+        cUserType.setSelectedIndex(-1);
+        cUserType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cUserTypeActionPerformed(evt);
             }
         });
 
@@ -105,7 +117,7 @@ public class UsersView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cUserType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtFirstName)))))
                     .addComponent(txtFatherName)
                     .addGroup(layout.createSequentialGroup()
@@ -142,7 +154,7 @@ public class UsersView extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1)))
+                        .addComponent(cUserType)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -166,28 +178,87 @@ public class UsersView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserNameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-int id =Integer.valueOf(txtId.getText());
         
-        
-        
-        
-        
-        
-     
+        boolean isTextEmpty = Validation.isEmpty(txtId.getText(), txtUserName.getText(), txtPassword.getText(),txtFirstName.getText(), txtFatherName.getText());
+        boolean isEmpty = Validation.isEmpty(cUserType.getSelectedIndex());
+        boolean isDigit = Validation.isDigit(txtId.getText(), txtMobile.getText());
+        boolean isText = Validation.isText(txtUserName.getText(), txtPassword.getText(),txtFirstName.getText(), txtFatherName.getText());
+        if (isTextEmpty == true || isEmpty == true) {
+            JOptionPane.showMessageDialog(null, "please inter valid data thanks ");
+            return;
+        }
+        System.out.println(isDigit + " " +  isText);
+        if (isDigit == false || isText ==false   ) {
+            JOptionPane.showMessageDialog(null, "please inter valid data please ");
+            return;
+        }
+
+        int id = Integer.valueOf(txtId.getText());//2:10:11 / 8:07:10
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+        UsersType usersType = UsersType.getUsersTypeByType(cUserType.getSelectedItem().toString());
+        UsersVo usersVo = new UsersVo();
+        usersVo.setId(id);
+        usersVo.setUsername(userName);
+        usersVo.setPassword(password);
+        usersVo.setUsersType(usersType);
+        String firstName = txtFirstName.getText();
+        String fatherName = txtFatherName.getText();
+        String mobile = txtMobile.getText();
+        UserDetailsVo userDetailsVo = new UserDetailsVo();
+        userDetailsVo.setUsersVo(usersVo);
+        userDetailsVo.setFirstName(firstName);
+        userDetailsVo.setFatherName(fatherName);
+        userDetailsVo.setMobile(mobile);
+        try {
+            int usersCount = UsersDao.getInstance().insert(usersVo);
+            int UserDetailsCount = UserDetailsDao.getInstance().insert(userDetailsVo);
+            System.out.println(usersCount);
+            System.out.println(UserDetailsCount);
+            if (usersCount == 1 && UserDetailsCount == 1) {
+                JOptionPane.showMessageDialog(null, "insert successfully");
+                reset();
+            } else {
+                JOptionPane.showMessageDialog(null, "insert failed  ");
+            }
+        } catch (Exception ex) {
+            
+            throw new RuntimeException(ex);
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cUserTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cUserTypeActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    
+  protected void reset()  {
+   txtId.setText("");
+   txtUserName.setText("");
+   txtPassword.setText("");
+   txtFirstName.setText("");
+   txtFatherName.setText("");
+   txtMobile.setText("");
+   cUserType.setSelectedIndex(-1);
+   
+    
+    
+    
+    
+    
+}
+      
+       
+       public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -216,8 +287,8 @@ int id =Integer.valueOf(txtId.getText());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cUserType;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
