@@ -54,6 +54,7 @@ public class UsersView extends javax.swing.JFrame {
         txtFirstName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel6.setText("Father Name");
 
@@ -211,18 +212,16 @@ public class UsersView extends javax.swing.JFrame {
         userDetailsVo.setFatherName(fatherName);
         userDetailsVo.setMobile(mobile);
         try {
-            int usersCount = UsersDao.getInstance().insert(usersVo);
-            int UserDetailsCount = UserDetailsDao.getInstance().insert(userDetailsVo);
-            System.out.println(usersCount);
-            System.out.println(UserDetailsCount);
-            if (usersCount == 1 && UserDetailsCount == 1) {
-                JOptionPane.showMessageDialog(null, "insert successfully");
+         //   int usersCount = UsersDao.getInstance().insert(usersVo);
+            int count = UserDetailsDao.getInstance().insert(userDetailsVo);
+            if (count == 1 ) {
+                JOptionPane.showMessageDialog(null, "insert successfully ");
                 reset();
             } else {
-                JOptionPane.showMessageDialog(null, "insert failed  ");
+                JOptionPane.showMessageDialog(null, " failure insert failed  ");
             }
         } catch (Exception ex) {
-            
+            System.out.println("ex");
             throw new RuntimeException(ex);
         }
 

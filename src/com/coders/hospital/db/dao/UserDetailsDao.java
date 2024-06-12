@@ -34,22 +34,33 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
     public int insert(UserDetailsVo udv) throws Exception {
         
         Connection con = null;
+        PreparedStatement ps = null;
         
        //java.sql.Connection con = null;///////
         int count = 0;
         try {
             con = getConnetion();
-            String sql = "INSERT INTO users_details(USER_ID,FIRST_NAME,FATHER_NAME,MOBILE) VALUES ( ?,  ?,  ?,  ?)";
-            PreparedStatement ps = con.prepareStatement(sql);
+            con.setAutoCommit(false);
+             String userSql = "INSERT INTO users(USER_NAME,PASSWORD,USER_TYPE,ID) VALUES(?,?,?,?) ";
+             ps = con.prepareStatement(userSql);
+            ps.setString(1, udv.getUsersVo().getUsername());
+            ps.setString(2, udv.getUsersVo().getPassword());
+            ps.setInt(3, udv.getUsersVo().getUsersType().getId());
+            ps.setInt(4, udv.getUsersVo().getId());
+            ps.executeUpdate();
+            String userDetailsSql = "INSERT INTO users_details(USER_ID,FIRST_NAME,FATHER_NAME,MOBILE) VALUES ( ?,  ?,  ?,  ?)";
+             ps = con.prepareStatement(userDetailsSql);
             ps.setInt(1, udv.getUsersVo().getId());
             ps.setString(2, udv.getFirstName());
             ps.setString(3, udv.getFatherName());
             ps.setString(4, udv.getMobile());
-            count = ps.executeUpdate();
-            ps.close();
+             ps.executeUpdate();
+             con.commit();
+             count=1;
         } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
+            con.rollback();
+        } finally { 
+            ps.close();
             closeConnection(con);
         }
         return count;
