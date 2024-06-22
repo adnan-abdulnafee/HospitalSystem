@@ -35,7 +35,7 @@ public class UsersDao extends Dao implements DaoList<UsersVo> {
         int count=0;
         try {
             con = getConnetion();
-            String sql = "INSERT INTO users(USER_NAME,PASSWORD,USER_TYPE,ID) VALUES(?,?,?,?) ";
+            String sql = "INSERT INTO users(USER_NAME,PASSWORD,USER_TYPE,ID) VALUES(?,?,?,?) ";   
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1, uv.getUsername());
@@ -84,6 +84,40 @@ public class UsersDao extends Dao implements DaoList<UsersVo> {
                 usersVo.setUsersType(usersType);
 
             }
+            if (rs != null) {
+                rs.close();
+            }
+            ps.close();
+        } catch (Exception ex) {
+        } finally {
+            closeConnection(con);
+        }
+        return usersVo;
+    }
+
+    @Override
+    public UsersVo getDataById(int id) throws Exception {
+      Connection con = null;
+        UsersVo usersVo = null;
+        ResultSet rs = null;
+       
+        try {
+            con = getConnetion();
+            String sql = "SELECT * FROM users WHERE ID = ?";
+            PreparedStatement ps = con.prepareCall(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                usersVo = new UsersVo();
+                usersVo.setId(rs.getInt("id"));
+                usersVo.setUsername(rs.getString("user_name"));
+                usersVo.setPassword(rs.getString("password"));
+                
+               // UsersType usersType = UsersType.getUsersTypeById(rs.getInt("USER_TYPE"));
+                UsersType usersType =UsersType.getUsersTypeByType("USER_TYPE");
+                usersVo.setUsersType(usersType);
+
+            }
             rs.close();
             ps.close();
         } catch (Exception ex) {
@@ -91,5 +125,8 @@ public class UsersDao extends Dao implements DaoList<UsersVo> {
             closeConnection(con);
         }
         return usersVo;
+    
+    
+    
     }
 }

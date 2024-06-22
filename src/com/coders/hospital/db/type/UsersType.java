@@ -8,6 +8,17 @@ public enum UsersType {
     ADMIN(1, "admin"), DOCTOR(2, "doctor"), NURSE(3, "nurse");
 //ممكن كمل بقية الثوابت عندي ك المريض و النرس و الخ
 
+    public static UsersType getUsersTypeById(int type) {
+               for ( UsersType usersType : UsersType.values() ) {
+            int t = usersType.getId();
+            if (t == type ) {
+                return usersType;
+            }
+        }
+        return null;
+    }
+
+
     private int id;
     private String type;
 

@@ -18,6 +18,7 @@ public interface DaoList<T> {
     public int delete(T t) throws Exception;
 
     public T getData(T t) throws Exception;
-
-
+    
+    public T getDataById(int id) throws Exception;
+    
 }

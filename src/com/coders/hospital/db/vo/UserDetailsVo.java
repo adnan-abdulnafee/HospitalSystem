@@ -9,6 +9,10 @@ public class UserDetailsVo {
     private String FirstName;
     private String FatherName;
     private String Mobile;
+    private byte [] image;
+    private String Specialization;
+
+    
 
     public int getId() {
         return id;
@@ -49,4 +53,23 @@ public class UserDetailsVo {
     public void setMobile(String mobile) {
         this.Mobile = mobile;
     }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+    
+    
+    public String getSpecialization() {
+        return Specialization;
+    }
+
+    public void setSpecialization(String Specialization) {
+        this.Specialization = Specialization;
+    }
+    
+    
 }

@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Codersbay/Projects/FinalProjects/HospitalSystem/src/com/coders/hospital/view/Login.java</file>
+            <file>file:/C:/Users/Codersbay/Projects/FinalProjects/HospitalSystem/src/com/coders/hospital/view/PatientInfoView.java</file>
+            <file>file:/C:/Users/Codersbay/Projects/FinalProjects/HospitalSystem/src/com/coders/hospital/view/Home.java</file>
+            <file>file:/C:/Users/Codersbay/Projects/FinalProjects/HospitalSystem/src/com/coders/hospital/db/dao/UserDetailsDao.java</file>
+            <file>file:/C:/Users/Codersbay/Projects/FinalProjects/HospitalSystem/src/com/coders/hospital/db/vo/UserDetailsVo.java</file>
+            <file>file:/C:/Users/Codersbay/Projects/FinalProjects/HospitalSystem/src/com/coders/hospital/view/UsersView.java</file>
         </group>
     </open-files>
 </project-private>
