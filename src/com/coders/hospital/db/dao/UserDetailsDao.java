@@ -89,13 +89,14 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
             ps.setInt(3, udv.getUsersVo().getUsersType().getId());
             ps.setInt(4, udv.getUsersVo().getId());
             ps.executeUpdate();           
-            String userDetailsSql = "UPDATE users_details SET FIRST_NAME=?,FATHER_NAME=?,MOBILE=?,IMAGE=? WHERE USER_ID=?";
+            String userDetailsSql = "UPDATE users_details SET FIRST_NAME=?,FATHER_NAME=?,MOBILE=?,IMAGE=?,Specialization=? WHERE USER_ID=?";
             ps = con.prepareStatement(userDetailsSql);
             ps.setString(1, udv.getFirstName());
             ps.setString(2, udv.getFatherName());
             ps.setString(3, udv.getMobile());
             ps.setBytes(4, udv.getImage());
             ps.setInt(5, udv.getUsersVo().getId());
+            ps.setString(6,udv.getSpecialization());
             ps.executeUpdate();
             con.commit();
             count = 1;
@@ -164,7 +165,7 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
         try {
             con = getConnetion();
 
-            String userSql = "SELECT USERS.ID,users.USER_NAME,users.PASSWORD,users.USER_TYPE , users_details.FIRST_NAME,users_details.FATHER_NAME,users_details.MOBILE,users_details.image FROM users INNER JOIN users_details ON users.ID = users_details.USER_ID WHERE users.ID = ?";
+            String userSql = "SELECT USERS.ID,users.USER_NAME,users.PASSWORD,users.USER_TYPE , users_details.FIRST_NAME,users_details.FATHER_NAME,users_details.MOBILE,users_details.image ,users_details.Specialization FROM users INNER JOIN users_details ON users.ID = users_details.USER_ID WHERE users.ID = ?";
             ps = con.prepareStatement(userSql);
             ps.setInt(1, id);
              rs = ps.executeQuery();
@@ -181,6 +182,7 @@ public class UserDetailsDao extends Dao implements DaoList<UserDetailsVo> {
                  userDetailsVo.setFatherName(rs.getString("FATHER_NAME"));
                  userDetailsVo.setMobile(rs.getString("MOBILE"));
                  userDetailsVo.setImage(rs.getBytes("image"));
+                 userDetailsVo.setSpecialization(rs.getString("Specialization"));
                  userDetailsVo.setUsersVo(usersVo);
              }
         } catch (Exception ex) {
