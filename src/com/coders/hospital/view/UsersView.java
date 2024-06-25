@@ -66,7 +66,6 @@ public class UsersView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cmpSpecialization = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setFocusTraversalPolicyProvider(true);
         setSize(new java.awt.Dimension(0, 0));
@@ -103,7 +102,7 @@ public class UsersView extends javax.swing.JFrame {
         jLabel4.setText("UserType");
         jLabel4.setAutoscrolls(true);
 
-        cUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "doctor", "nurse" }));
+        cUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "doctor", "nurse", "reception", "patient", "pharmacist", "laboratorist", "acountant" }));
         cUserType.setSelectedIndex(-1);
         cUserType.setAutoscrolls(true);
         cUserType.addActionListener(new java.awt.event.ActionListener() {

@@ -117,7 +117,8 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Enter valid username and password");
             } else {
 
-                Home home = new Home();
+                Home home = new Home(uv);
+                Home.usersVo = uv ;
                 home.setVisible(true);
                 this.setVisible(false);
 

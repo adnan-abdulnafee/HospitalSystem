@@ -4,19 +4,73 @@
  */
 package com.coders.hospital.view;
 
+import com.coders.hospital.db.vo.UsersVo;
+
 /**
  *
  * @author Codersbay
  */
 public class Home extends javax.swing.JFrame {
+    public static UsersVo usersVo;
 
     /**
      * Creates new form Home
      */
-    public Home() {
+    public Home(UsersVo uv) {
         initComponents();
         this.setLocationRelativeTo(null);
+        usersVo = uv;
+        getUserLevel();
     }
+    protected void getUserLevel(){
+        switch(usersVo.getUsersType().getType()){
+            case "admin":
+                mDoctor.setEnabled(false);
+                mNurse.setEnabled(false);
+                mReception.setEnabled(false);
+                break;
+
+            case "doctor":
+                mAdmin.setEnabled(false);
+                mNurse.setEnabled(false);
+                mReception.setEnabled(false);
+                break;
+
+            case "nurse":
+                mDoctor.setEnabled(false);
+                mAdmin.setEnabled(false);
+                mReception.setEnabled(false);
+                break;
+
+            case "receptionist":
+                mDoctor.setEnabled(false);
+                mNurse.setEnabled(false);
+                mAdmin.setEnabled(false);
+                break;
+
+            case "patient":
+                break;
+
+            case "pharmacist":
+                break;
+
+            case "laboratorist":
+                break;
+
+            case "acountant":
+                break;
+
+                
+        } 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,13 +81,20 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mAdmin = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        mDoctor = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        mReception = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        mNurse = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -42,7 +103,7 @@ public class Home extends javax.swing.JFrame {
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jMenu1.setText("Admin");
+        mAdmin.setText("Admin");
 
         jMenuItem1.setText("Add New User");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -50,24 +111,45 @@ public class Home extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        mAdmin.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mAdmin);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mDoctor.setText("Doctor");
 
-        jMenu3.setText("Receptionist");
+        jMenuItem3.setText("Patient Info");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mDoctor.add(jMenuItem3);
 
-        jMenuItem2.setText("PatientInfo");
+        jMenuBar1.add(mDoctor);
+
+        mReception.setText("Receptionist");
+
+        jMenuItem2.setText("Patient Info");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        mReception.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(mReception);
+
+        mNurse.setText("Nurse");
+
+        jMenuItem4.setText("Patient Info");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        mNurse.add(jMenuItem4);
+
+        jMenuBar1.add(mNurse);
 
         setJMenuBar(jMenuBar1);
 
@@ -100,6 +182,21 @@ PatientInfoView patientInfoView =new PatientInfoView();
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    MessageView messageView = new MessageView();
+    messageView.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+MessageView messageView = new MessageView();
+    messageView.setVisible(true);
+
+
+
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -130,18 +227,22 @@ PatientInfoView patientInfoView =new PatientInfoView();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+            //    new Home().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu mAdmin;
+    private javax.swing.JMenu mDoctor;
+    private javax.swing.JMenu mNurse;
+    private javax.swing.JMenu mReception;
     // End of variables declaration//GEN-END:variables
 }

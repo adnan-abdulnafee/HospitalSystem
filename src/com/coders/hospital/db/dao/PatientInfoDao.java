@@ -64,8 +64,32 @@ private static PatientInfoDao patientInfoDao;
     }
 
     @Override
-    public int update(PatientInfoVo t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(PatientInfoVo piv) throws Exception {
+
+  Connection con = null;
+        PreparedStatement ps = null;
+        int count = 0;
+        try {
+            con = getConnetion();
+            String sql = "UPDATE patient_info SET FIRST_NAME=?,FATHER_NAME=?,MOBILE=?,EMAIL=?,USER_ID=? WHERE ID=? ";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, piv.getFirstName());
+            ps.setString(2, piv.getFatherName());
+            ps.setString(3, piv.getMobile());
+            ps.setString(4, piv.getEmail());
+            ps.setInt(5, piv.getUsersVo().getId());
+            ps.setInt(6, piv.getId());
+            count = ps.executeUpdate();           
+            
+        } catch (Exception ex) {
+        } finally {
+            ps.close();
+            closeConnection(con);
+        }
+        return count;
+
+
+
     }
 
     @Override

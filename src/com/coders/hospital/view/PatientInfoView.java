@@ -11,6 +11,7 @@ import com.coders.hospital.db.vo.PatientInfoVo;
 import com.coders.hospital.db.vo.UserDetailsVo;
 import com.coders.hospital.db.vo.UsersVo;
 import com.coders.hospital.validation.Validation;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,8 +52,9 @@ public class PatientInfoView extends javax.swing.JFrame {
         txtUserId = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnEdit = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnGetMessage = new javax.swing.JButton();
 
         jLabel1.setText("ID");
 
@@ -80,11 +82,32 @@ public class PatientInfoView extends javax.swing.JFrame {
             }
         });
 
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnGetMessage.setText("Get message");
+        btnGetMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetMessageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -103,14 +126,20 @@ public class PatientInfoView extends javax.swing.JFrame {
                     .addComponent(txtMobile)
                     .addComponent(txtEmail)
                     .addComponent(txtUserId, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGetMessage))
                 .addGap(42, 42, 42))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdd, btnDelete, btnEdit, btnGetMessage, btnSearch});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,23 +161,35 @@ public class PatientInfoView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(btnDelete)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFatherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFatherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEdit)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(btnSearch)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addComponent(btnGetMessage)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5});
@@ -244,6 +285,114 @@ public class PatientInfoView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+
+        boolean isTextEmpty = Validation.isEmpty(txtId.getText(),txtFirstName.getText(),txtFatherName.getText(),txtMobile.getText(),txtEmail.getText(),txtUserId.getText());
+        boolean isDigit = Validation.isDigit(txtId.getText(),txtUserId.getText(),txtMobile.getText());
+        boolean isText = Validation.isText( txtFirstName.getText(), txtFatherName.getText(),txtEmail.getText());
+        if (isTextEmpty == true ) {
+            JOptionPane.showMessageDialog(null, "please inter valid data thanks ");
+            return;
+        }
+        if (isDigit == false || isText == false) {
+            JOptionPane.showMessageDialog(null, "please inter valid data please ");
+            return;
+        }
+        int id =Integer.valueOf( txtId.getText());
+        String firstName = txtFirstName.getText();
+        String fatherName = txtFatherName.getText();
+        String mobile = txtMobile.getText();
+        String email = txtEmail.getText();
+        int userId = Integer.parseInt(txtUserId.getText());
+        PatientInfoVo   patientInfoVo = new PatientInfoVo();
+        patientInfoVo.setId(id);
+        patientInfoVo.setFirstName(firstName);
+        patientInfoVo.setFatherName(fatherName);
+        patientInfoVo.setMobile(mobile);
+        patientInfoVo.setEmail(email);
+        UsersVo usersVo= new UsersVo();
+        usersVo.setId(userId);
+        patientInfoVo.setUsersVo(usersVo);
+
+
+
+        
+  try {
+         PatientInfoVo piv = PatientInfoDao.getInstance().getDataById(id);
+            if (piv == null) {
+                JOptionPane.showMessageDialog(null, "please enter valid data ");
+                return;
+            }
+            int count = PatientInfoDao.getInstance().update(patientInfoVo);
+            if (count == 1) {
+                JOptionPane.showMessageDialog(null, "update successfully ");
+                reset();
+            } else {
+                JOptionPane.showMessageDialog(null, " failure update failed  ");
+            }
+        } catch (Exception ex) {
+
+            throw new RuntimeException(ex);
+        }
+
+
+
+
+
+
+
+
+
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        boolean isTextEmpty = Validation.isEmpty(txtId.getText());
+        boolean isDigit = Validation.isDigit(txtId.getText());
+        if (isTextEmpty == true) {
+            JOptionPane.showMessageDialog(null, "please inter valid ID  ");
+            return;
+        }
+        if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "please inter valid ID please ");
+            return;
+        }
+        int id = Integer.valueOf(txtId.getText());
+        try {
+
+            PatientInfoVo patientInfoVo = PatientInfoDao.getInstance().getDataById(id);
+            
+            if (patientInfoVo == null) {
+                JOptionPane.showMessageDialog(null, "ID not exist");
+                reset();
+            } else {
+                txtFirstName.setText(patientInfoVo.getFirstName());
+                txtFatherName.setText(patientInfoVo.getFatherName());
+                txtMobile.setText(patientInfoVo.getMobile());
+                txtEmail.setText(patientInfoVo.getEmail());
+                txtUserId.setText(String.valueOf(patientInfoVo.getUsersVo().getId()));
+
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            throw new RuntimeException(ex); 
+        }
+
+
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnGetMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetMessageActionPerformed
+    MessageView messageView=new MessageView();
+    messageView.setVisible(true);
+    
+
+
+
+
+
+    }//GEN-LAST:event_btnGetMessageActionPerformed
+
     protected void reset(){
         txtId.setText("");
         txtFirstName.setText("");
@@ -300,6 +449,9 @@ public class PatientInfoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnGetMessage;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

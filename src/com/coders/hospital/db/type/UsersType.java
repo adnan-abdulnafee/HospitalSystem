@@ -5,8 +5,8 @@ package com.coders.hospital.db.type;
  */
 public enum UsersType {
 
-    ADMIN(1, "admin"), DOCTOR(2, "doctor"), NURSE(3, "nurse");
-//ممكن كمل بقية الثوابت عندي ك المريض و النرس و الخ
+    ADMIN(1, "admin"), DOCTOR(2, "doctor"), NURSE(3, "nurse"),RECEPTION(4,"reception"),PATIENT(5,"patient"),PHARMACIST(6,"pharmacist"),LABORATORIST(7,"laboratorist"),ACOUNTANT(8,"acountant");
+
 
     public static UsersType getUsersTypeById(int type) {
                for ( UsersType usersType : UsersType.values() ) {
